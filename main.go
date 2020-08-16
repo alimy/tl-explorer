@@ -24,7 +24,7 @@ func main() {
 	if host == "" {
 		host = "localhost"
 	}
-	fmt.Printf("tl-explorer listening in [%s]. Please open http://%s:%d in browser to enjoy yourself.\n", addr, host, port)
+	fmt.Printf("Listening in [%s]. Please open http://%s:%d in browser to enjoy yourself.\n", addr, host, port)
 
 	internal.StartServe(addr)
 }

@@ -7,6 +7,7 @@ Telegram tl-schema explorer is An AngularJS app to search and view the Telegram 
 ```bash
 % go get github.com/alimy/tl-explorer
 % tl-explorer
+Listening in [:8080]. Please open http://localhost:8080 in browser to enjoy yourself.
 ```
 **Notes**: The assets copy from [schema.tl](https://github.com/tjhorner/schema.tl). Thanks TJ Horner.
 
