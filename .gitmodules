@@ -1,0 +1,3 @@
+[submodule "assets/schema.tl"]
+	path = assets/schema.tl
+	url = https://github.com/tjhorner/schema.tl.git
