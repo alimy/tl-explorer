@@ -9,7 +9,7 @@ RELEASE_WINDOWS_AMD64 = $(RELEASE_ROOT)/windows-amd64/$(TARGET)
 
 .PHONY: run
 run: fmt
-	go run -tags skippackr main.go
+	go run main.go
 
 .PHONY: build
 build:
@@ -39,10 +39,6 @@ darwin-amd64:
 .PHONY: windows-x64
 windows-x64:
 	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build  -ldflags '$(LDFLAGS)' -o $(RELEASE_WINDOWS_AMD64)/$(TARGET) main.go
-
-.PHONY: packr
-packr:
-	packr2
 
 .PHONY: fmt
 fmt:
