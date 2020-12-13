@@ -7,8 +7,10 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
+	"net/http"
 
-	"github.com/alimy/tl-explorer/internal"
+	"github.com/alimy/tl-explorer/assets"
 )
 
 var (
@@ -30,5 +32,6 @@ func main() {
 	}
 	fmt.Printf("Listening in [%s]. Please open http://%s:%d in browser to enjoy yourself.\n", addr, host, port)
 
-	internal.StartServe(addr)
+	http.Handle("/", http.FileServer(assets.NewFS()))
+	log.Fatal(http.ListenAndServe(addr, nil))
 }
