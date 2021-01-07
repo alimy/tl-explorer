@@ -1,0 +1,10 @@
+[Unit]
+Description=tl-explorer
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/tl-explorer
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
