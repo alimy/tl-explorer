@@ -6,38 +6,16 @@ package assets
 
 import (
 	"embed"
-	"io/fs"
 	"net/http"
-	"strings"
+
+	"github.com/alimy/embedx"
 )
 
-//go:embed schema.tl
-var schemaTL embed.FS
+// NewFileSystem get an assets http.FileSystem instance
+func NewFileSystem() http.FileSystem {
+	//go:embed schema.tl
+	var content embed.FS
 
-type fsFunc func(name string) (fs.File, error)
-
-func (f fsFunc) Open(name string) (fs.File, error) {
-	return f(name)
-}
-
-// chroot change dir as root directory
-func chroot(dir string, emFS embed.FS) fs.FS {
-	if dir == "" {
-		return emFS
-	}
-
-	root := strings.TrimSuffix(dir, "/")
-	rootSlash := root + "/"
-
-	return fsFunc(func(name string) (fs.File, error) {
-		if name == "." {
-			return emFS.Open(root)
-		}
-		return emFS.Open(rootSlash + name)
-	})
-}
-
-// NewFS get an assets http.FileSystem instance
-func NewFS() http.FileSystem {
-	return http.FS(chroot("schema.tl", schemaTL))
+	embedFS := embedx.NewFileSystem(&content, embedx.ChangeRoot("schema.tl"))
+	return http.FS(embedFS)
 }
