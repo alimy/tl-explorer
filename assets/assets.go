@@ -16,6 +16,6 @@ func NewFileSystem() http.FileSystem {
 	//go:embed schema.tl
 	var content embed.FS
 
-	embedFS := embedx.NewFileSystem(&content, embedx.ChangeRoot("schema.tl"))
+	embedFS := embedx.ChangeRoot(content, "schema.tl")
 	return http.FS(embedFS)
 }
