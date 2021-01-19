@@ -11,11 +11,11 @@ import (
 	"github.com/alimy/embedx"
 )
 
+//go:embed schema.tl
+var content embed.FS
+
 // NewFileSystem get an assets http.FileSystem instance
 func NewFileSystem() http.FileSystem {
-	//go:embed schema.tl
-	var content embed.FS
-
 	embedFS := embedx.ChangeRoot(content, "schema.tl")
 	return http.FS(embedFS)
 }
