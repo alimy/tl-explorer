@@ -6,9 +6,9 @@ package assets
 
 import (
 	"embed"
+	"io/fs"
+	"log"
 	"net/http"
-
-	"github.com/alimy/embedx"
 )
 
 //go:embed schema.tl
@@ -16,6 +16,9 @@ var content embed.FS
 
 // NewFileSystem get an assets http.FileSystem instance
 func NewFileSystem() http.FileSystem {
-	embedFS := embedx.ChangeRoot(content, "schema.tl")
+	embedFS, err := fs.Sub(content, "schema.tl")
+	if err != nil {
+		log.Fatal(err)
+	}
 	return http.FS(embedFS)
 }
